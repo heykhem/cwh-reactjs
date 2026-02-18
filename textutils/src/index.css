@@ -9,3 +9,13 @@
 .scroll-box {
   overflow-y: auto;
 }
+
+.parent {
+  position: relative; /* makes child absolute relative to this */
+}
+
+.child {
+  position: absolute;
+  bottom: -80px; /* moves element 80px below parent's bottom */
+  right: 0;
+}

@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 export default function TextForm(props) {
+  const [showAlert, setShowAlert] = useState(false);
   const [text, setText] = useState("");
 
   const handleUpClick = () => {
@@ -13,6 +14,17 @@ export default function TextForm(props) {
     setText(newText);
   };
 
+  const handleCopy = () => {
+    const textarea = document.getElementById("myBox");
+    textarea.select();
+    navigator.clipboard.writeText(text);
+    setShowAlert(true);
+
+    setTimeout(() => {
+      setShowAlert(false);
+    }, 1000);
+  };
+
   const handleOnChange = (e) => {
     setText(e.target.value);
   };
@@ -21,7 +33,7 @@ export default function TextForm(props) {
     <>
       <div className="d-flex">
         <div className="container">
-          <div className="mb-3">
+          <div className="mb-3 parent">
             <h1 className="fs-3 mb-3">{props.heading}</h1>
             <textarea
               name=""
@@ -31,6 +43,11 @@ export default function TextForm(props) {
               onChange={handleOnChange}
               value={text}
             ></textarea>
+            {showAlert && (
+              <div className="alert alert-success child" role="alert">
+                Copied successfully!
+              </div>
+            )}
           </div>
 
           <div className="d-flex gap-5 mt-2 mb-3 ">
@@ -40,15 +57,29 @@ export default function TextForm(props) {
                 : text.split(" ").length}{" "}
               words and {text.length} characters
             </p>
-            <p>{0.008 * text.split(" ").length} Minutes to read</p>
+            <p>{0.008 * text.split(" ").length} Minutes to Read</p>
           </div>
 
-          <button className="btn btn-primary" onClick={handleUpClick}>
-            Convert to Uppercase
-          </button>
-          <button className="btn btn-primary ms-3" onClick={handleLoClick}>
-            Convert to Lowercase
-          </button>
+          <div className="d-flex gap-1 align-items-start">
+            <button
+              className="btn btn-primary flex-shrink-0"
+              onClick={handleUpClick}
+            >
+              Convert to Uppercase
+            </button>
+            <button
+              className="btn btn-primary flex-shrink-0"
+              onClick={handleLoClick}
+            >
+              Convert to Lowercase
+            </button>
+            <button
+              className="btn btn-primary flex-shrink-0"
+              onClick={handleCopy}
+            >
+              Copy
+            </button>
+          </div>
         </div>
 
         <div className="container">
