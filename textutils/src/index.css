@@ -16,6 +16,6 @@
 
 .child {
   position: absolute;
-  bottom: -80px; /* moves element 80px below parent's bottom */
-  right: 0;
+  bottom: -16px;
+  right: 12px;
 }

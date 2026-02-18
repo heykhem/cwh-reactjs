@@ -6,8 +6,7 @@ export default function About() {
 
   const toggleStyle = () => {
     if (!myStyle.backgroundColor) {
-      let htmlBody = document.querySelector("body");
-      htmlBody.style.backgroundColor = "Black";
+      document.body.style.backgroundColor = "Black";
 
       setMyStyle({
         color: "white",
@@ -15,8 +14,7 @@ export default function About() {
       });
       setBtnText("Enable Light Mode");
     } else {
-      let htmlBody = document.querySelector("body");
-      htmlBody.style.backgroundColor = "white";
+      document.body.style.backgroundColor = "White";
 
       setMyStyle({});
       setBtnText("Enable Dark Mode");
