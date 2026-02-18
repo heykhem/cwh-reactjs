@@ -1,0 +1,11 @@
+.no-resize {
+  resize: none;
+}
+
+.custom-height {
+  height: 280px;
+}
+
+.scroll-box {
+  overflow-y: auto;
+}
