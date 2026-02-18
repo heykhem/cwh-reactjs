@@ -25,6 +25,13 @@ export default function TextForm(props) {
     }, 1000);
   };
 
+  // Credits: Coding Wala
+
+  const handleExtraSpaces = () => {
+    let newText = text.split(/[ ]+/);
+    setText(newText.join(" "));
+  };
+
   const handleOnChange = (e) => {
     setText(e.target.value);
   };
@@ -72,6 +79,13 @@ export default function TextForm(props) {
               onClick={handleLoClick}
             >
               Convert to Lowercase
+            </button>
+
+            <button
+              className="btn btn-primary flex-shrink-0"
+              onClick={handleExtraSpaces}
+            >
+              Remove Extra Spaces
             </button>
             <button
               className="btn btn-primary flex-shrink-0"
