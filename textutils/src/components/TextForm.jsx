@@ -1,6 +1,5 @@
 import { useState } from "react";
 export default function TextForm(props) {
-  const [showAlert, setShowAlert] = useState(false);
   const [text, setText] = useState("");
 
   const handleUpClick = () => {
@@ -17,8 +16,7 @@ export default function TextForm(props) {
 
   const handleCopy = () => {
     document.querySelector("#myBox").select();
-    navigator.clipboard.writeText(text).then(() => setShowAlert(true));
-    setTimeout(() => setShowAlert(false), 1000);
+    navigator.clipboard.writeText(text);
 
     props.showAlert("Copied to Clipboard", "success");
   };
@@ -58,11 +56,6 @@ export default function TextForm(props) {
             onChange={handleOnChange}
             value={text}
           ></textarea>
-          {showAlert && (
-            <div className="alert alert-success child" role="alert">
-              Copied successfully!
-            </div>
-          )}
 
           <div
             className={`d-flex gap-5 mt-2 mb-3 text-${props.mode === "light" ? "dark-emphasis" : "white"} fs-6`}
@@ -88,7 +81,7 @@ export default function TextForm(props) {
           >
             {text.length > 0
               ? text
-              : "Write something to Textbox preview here."}
+              : "Write something to TextBox to preview here."}
           </p>
         </div>
       </div>

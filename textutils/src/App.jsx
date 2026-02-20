@@ -29,9 +29,25 @@ function App() {
       showAlert("Light Mode is Enabled", "success");
     }
   };
+
+  const customMode = (color) => {
+    if (color === "blue") {
+      setMode("dark");
+      document.body.style.backgroundColor = "#001d3d";
+    } else if (color === "green") {
+      setMode("dark");
+      document.body.style.backgroundColor = "#003d0e";
+    }
+  };
+
   return (
     <div className="parent">
-      <Navbar title="TextUtils" mode={mode} toggleMode={toggleMode} />
+      <Navbar
+        title="TextUtils"
+        mode={mode}
+        toggleMode={toggleMode}
+        customMode={customMode}
+      />
       <Alert alert={alert} />
       <div className="container my-3">
         <TextForm

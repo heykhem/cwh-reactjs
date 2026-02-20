@@ -1,6 +1,18 @@
 import PropTypes from "prop-types";
 
 export default function Navbar(props) {
+  let modeStyle = {
+    width: "20px",
+    height: "16px",
+    borderRadius: "10px",
+    cursor: "pointer",
+  };
+
+  let customTheme = (event) => {
+    const color = event.currentTarget.dataset.color;
+    if (color) props.customMode(color);
+  };
+
   return (
     <>
       <nav
@@ -34,20 +46,36 @@ export default function Navbar(props) {
                 </a>
               </li>
             </ul>
-            <div className="form-check form-switch">
-              <input
-                className="form-check-input"
-                type="checkbox"
-                value=""
-                id="checkNativeSwitch"
-                onClick={props.toggleMode}
-              />
-              <label
-                className={`form-check-label .form-check text-${props.mode === "light" ? "black" : "white"}`}
-                htmlFor="checkNativeSwitch"
-              >
-                {props.mode === "light" ? "Dark" : "Light"} Mode
-              </label>
+            <div className="d-flex align-items-center">
+              <div className="d-flex gap-1 me-2">
+                <div
+                  data-color="blue"
+                  className="theme mode-blue"
+                  onClick={customTheme}
+                  style={modeStyle}
+                ></div>
+                <div
+                  data-color="green"
+                  className="theme mode-green"
+                  onClick={customTheme}
+                  style={modeStyle}
+                ></div>
+              </div>
+              <div className="form-check form-switch">
+                <input
+                  className="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="checkNativeSwitch"
+                  onClick={props.toggleMode}
+                />
+                <label
+                  className={`form-check-label .form-check text-${props.mode === "light" ? "black" : "white"}`}
+                  htmlFor="checkNativeSwitch"
+                >
+                  {props.mode === "light" ? "Dark" : "Light"} Mode
+                </label>
+              </div>
             </div>
           </div>
         </div>

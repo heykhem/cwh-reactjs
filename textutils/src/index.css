@@ -11,11 +11,19 @@
 }
 
 .parent {
-  position: relative; /* makes child absolute relative to this */
+  position: relative;
 }
 
 .child {
   position: absolute;
   bottom: -16px;
   right: 12px;
+}
+
+.mode-blue {
+  background-color: #007bff;
+}
+
+.mode-green {
+  background-color: #28a745;
 }
