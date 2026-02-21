@@ -1,16 +1,38 @@
-# React + Vite
+# Project 1 - TextUtils
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+TextUtils is a simple React app built while learning ReactJS from the [CodeWithHarry React JS Playlist (Hindi)](https://www.youtube.com/playlist?list=PLu0W_9lII9agx66oZnT6IyhcMIbUMNMdt).
 
-Currently, two official plugins are available:
+This repo documents my hands-on learning journey, including mistakes and fixes.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Project Overview
 
-## React Compiler
+TextUtils is a text utility app where users can:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Convert text case
+- Remove extra spaces
+- Analyze word/character count
+- Estimate reading time
+- Use light/dark theme
 
-## Expanding the ESLint configuration
+## What I Learned
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Fuction-based React components
+- Props
+- React hook `useState`
+- Routing with `react-router-dom`
+
+## Features Implemented
+
+- Text transformation tools
+- Responsive navbar
+- Route-based pages (`/`, `/about`)
+- Common layout with navbar across pages
+- Theme toggle (light/dark)
+- OS theme detection (`prefers-color-scheme`)
+
+## How to Run
+
+```bash
+npm install
+npm run dev
+```
