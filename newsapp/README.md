@@ -1,4 +1,4 @@
-# Project 2 - newsapp
+# Project 2 - NewsMonkey
 
 This repo documents my hands-on learning journey, including mistakes and fixes.
 
