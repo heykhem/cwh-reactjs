@@ -8,12 +8,9 @@ export default class News extends Component {
       author: "Jacob Wendler",
       title:
         "Vietnam War veterans sue to block construction of Trump’s triumphal arch - Politico",
-      description:
-        "The veterans argued the project would encroach on the nearby Arlington National Cemetery.",
+      description: null,
       url: "https://www.politico.com/news/2026/02/19/trump-arlington-arch-lawsuit-00789763",
-      urlToImage:
-        "https://www.politico.com/dims4/default/resize/1200/quality/90/format/jpg?url=https%3A%2F%2Fstatic.politico.com%2F08%2F13%2Fa7a9d5234692b1d68ffafae96bb3%2Fgettyimages-2241266904.jpg",
-      publishedAt: "2026-02-19T22:24:58Z",
+      urlToImage: null,
       content:
         "The veterans Michael Lemmon, Shaun Byrnes and Jon Gundersen worked as U.S. diplomats after serving in the Vietnam War.\r\nIn the lawsuit, filed in the U.S. District Court for D.C., they argue the proje… [+2517 chars]",
     },
@@ -244,10 +241,20 @@ export default class News extends Component {
   constructor() {
     super();
     this.state = {
-      articles: this.articles,
+      //   articles: this.articles,
+      articles: [],
       loading: false,
     };
   }
+
+  async componentDidMount() {
+    let url =
+      "https://newsapi.org/v2/top-headlines?country=us&apiKey=f2d05d8265a841dc910bde9be97e206d";
+    let data = await fetch(url);
+    let parsedData = await data.json();
+    this.setState({ articles: parsedData.articles });
+  }
+
   render() {
     return (
       <div className="container mt-5 pb-3">
@@ -255,14 +262,17 @@ export default class News extends Component {
 
         <div className="row mt-2">
           {this.state.articles.map((element) => {
-            console.log(element.urlToImage);
             return (
               <div key={element.url} className="col-md-4">
                 <NewsItem
                   newsUrl={element.url}
-                  imageUrl={element.urlToImage}
+                  imageUrl={element.urlToImage || "/img/default.jpg"}
                   title={element.title}
-                  description={element.description.slice(0, 88) + " ..."}
+                  description={
+                    element.description
+                      ? element.description
+                      : "No description available"
+                  }
                 />
               </div>
             );
