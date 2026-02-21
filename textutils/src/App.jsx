@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Alert from "./components/Alert";
@@ -17,36 +17,39 @@ function App() {
     }, 2000);
   };
 
-  const toggleMode = () => {
-    if (mode === "light") {
-      setMode("dark");
-      document.body.style.backgroundColor = "black";
-      showAlert("Dark Mode is Enabled", "success");
-    } else {
-      setMode("light");
-      document.body.style.backgroundColor = "white";
-      showAlert("Light Mode is Enabled", "success");
-    }
-  };
+  useEffect(() => {
+    const media = window.matchMedia("(prefers-color-scheme: dark)");
 
-  const customMode = (color) => {
-    if (color === "blue") {
-      setMode("dark");
-      document.body.style.backgroundColor = "#001d3d";
-    } else if (color === "green") {
-      setMode("dark");
-      document.body.style.backgroundColor = "#003d0e";
-    }
+    const applyTheme = (isDark) => {
+      const theme = isDark ? "dark" : "light";
+      setMode(theme);
+      document.documentElement.setAttribute("data-bs-theme", theme);
+      document.body.style.backgroundColor = isDark ? "black" : "white";
+    };
+
+    // Initial OS theme
+    applyTheme(media.matches);
+
+    // Listen for OS theme changes
+    const handleChange = (e) => applyTheme(e.matches);
+    media.addEventListener("change", handleChange);
+
+    // Cleanup
+    return () => media.removeEventListener("change", handleChange);
+  }, []);
+
+  const toggleMode = (e) => {
+    const isDark = e.target.checked;
+    const nextMode = isDark ? "dark" : "light";
+
+    setMode(nextMode);
+    document.documentElement.setAttribute("data-bs-theme", nextMode);
+    document.body.style.backgroundColor = isDark ? "black" : "white";
   };
 
   return (
     <>
-      <Navbar
-        title="TextUtils"
-        mode={mode}
-        toggleMode={toggleMode}
-        customMode={customMode}
-      />
+      <Navbar title="TextUtils" mode={mode} toggleMode={toggleMode} />
       <Alert alert={alert} />
       <div className="container my-3">
         <Outlet context={{ mode, showAlert }} />

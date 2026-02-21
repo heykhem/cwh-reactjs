@@ -1,17 +1,7 @@
-import { useOutletContext } from "react-router-dom";
-
 export default function About() {
-  const { mode } = useOutletContext();
-  const myStyle = {
-    color: mode === "light" ? "black" : "white",
-    backgroundColor: mode === "light" ? "white" : "black",
-  };
-
   return (
     <div className="container" style={{ position: "relative" }}>
-      <h1 className="fs-2 mb-3" style={myStyle}>
-        About Us
-      </h1>
+      <h1 className="fs-2 mb-3">About Us</h1>
       <div className="accordion" id="accordionExample">
         <div className="accordion-item ">
           <h2 className="accordion-header">
@@ -22,7 +12,6 @@ export default function About() {
               data-bs-target="#collapseOne"
               aria-expanded="true"
               aria-controls="collapseOne"
-              style={myStyle}
             >
               Convert Text Case
             </button>
@@ -32,7 +21,7 @@ export default function About() {
             className="accordion-collapse collapse show"
             data-bs-parent="#accordionExample"
           >
-            <div className="accordion-body" style={myStyle}>
+            <div className="accordion-body">
               TextUtils lets you quickly convert your text to UPPERCASE and
               lowercase in one click, making editing fast and simple.
             </div>
@@ -47,7 +36,6 @@ export default function About() {
               data-bs-target="#collapseTwo"
               aria-expanded="false"
               aria-controls="collapseTwo"
-              style={myStyle}
             >
               Clean And Format Text
             </button>
@@ -57,7 +45,7 @@ export default function About() {
             className="accordion-collapse collapse"
             data-bs-parent="#accordionExample"
           >
-            <div className="accordion-body" style={myStyle}>
+            <div className="accordion-body">
               Remove extra spaces, clear text instantly, and format your content
               for better readability without manual effort.
             </div>
@@ -72,7 +60,6 @@ export default function About() {
               data-bs-target="#collapseThree"
               aria-expanded="false"
               aria-controls="collapseThree"
-              style={myStyle}
             >
               Analyze Your Content
             </button>
@@ -82,7 +69,7 @@ export default function About() {
             className="accordion-collapse collapse"
             data-bs-parent="#accordionExample"
           >
-            <div className="accordion-body" style={myStyle}>
+            <div className="accordion-body">
               Get instant word count, character count, estimated reading time,
               and a live preview to understand your text better.
             </div>

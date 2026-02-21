@@ -41,26 +41,20 @@ export default function TextForm(props) {
     <>
       <div className="container row mt-5">
         <div className="mb-3 parent flex-2 col-8 overflow-hidden">
-          <h1
-            className={`fs-3 mb-4 text-${props.mode === "light" ? "black" : "white"}`}
-          >
-            {props.heading}
-          </h1>
+          <h1 className={"fs-3 mb-4"}>{props.heading}</h1>
           <textarea
             name=""
             id="myBox"
-            className={`form-control no-resize custom-height bg-${props.mode === "light" ? "light" : "dark"} text-${props.mode === "light" ? "black" : "light"}`}
+            className={"form-control no-resize custom-height"}
             rows={8}
             onChange={handleOnChange}
             value={text}
           ></textarea>
 
-          <div
-            className={`d-flex gap-5 mt-2 mb-3 text-${props.mode === "light" ? "dark-emphasis" : "white"} fs-6`}
-          >
+          <div className={"d-flex gap-5 mt-2 mb-3 "}>
             <p>
               {
-                text.split(" ").filter((element) => {
+                text.split(/\s+/).filter((element) => {
                   return element.length !== 0;
                 }).length
               }{" "}
@@ -77,13 +71,9 @@ export default function TextForm(props) {
         </div>
 
         <div className="col-4 overflow-hidden">
-          <h1
-            className={`fs-3 mb-3 text-${props.mode === "light" ? "black" : "white"}`}
-          >
-            Preview
-          </h1>
+          <h1 className={"fs-3 mb-4"}>Preview</h1>
           <p
-            className={`form-control custom-height scroll-box user-select-none bg-${props.mode === "light" ? "light" : "dark"} text-${props.mode === "light" ? "black" : "light"}`}
+            className={"form-control custom-height scroll-box user-select-none"}
           >
             {text.length > 0
               ? text
@@ -92,6 +82,7 @@ export default function TextForm(props) {
         </div>
       </div>
 
+      {/* Buttons */}
       <div className="d-flex gap-2 align-items-start">
         <button
           className="btn btn-primary flex-shrink-0"
