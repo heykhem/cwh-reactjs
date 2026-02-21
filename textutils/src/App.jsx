@@ -40,7 +40,7 @@ function App() {
   };
 
   return (
-    <div className="parent">
+    <>
       <Navbar
         title="TextUtils"
         mode={mode}
@@ -51,7 +51,7 @@ function App() {
       <div className="container my-3">
         <Outlet context={{ mode, showAlert }} />
       </div>
-    </div>
+    </>
   );
 }
 

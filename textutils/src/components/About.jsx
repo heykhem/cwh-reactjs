@@ -1,28 +1,14 @@
-import { useState } from "react";
+import { useOutletContext } from "react-router-dom";
 
 export default function About() {
-  const [myStyle, setMyStyle] = useState({});
-  const [btnText, setBtnText] = useState("Enable Dark Mode");
-
-  const toggleStyle = () => {
-    if (!myStyle.backgroundColor) {
-      document.body.style.backgroundColor = "Black";
-
-      setMyStyle({
-        color: "white",
-        backgroundColor: "black",
-      });
-      setBtnText("Enable Light Mode");
-    } else {
-      document.body.style.backgroundColor = "White";
-
-      setMyStyle({});
-      setBtnText("Enable Dark Mode");
-    }
+  const { mode } = useOutletContext();
+  const myStyle = {
+    color: mode === "light" ? "black" : "white",
+    backgroundColor: mode === "light" ? "white" : "black",
   };
 
   return (
-    <div className="container">
+    <div className="container" style={{ position: "relative" }}>
       <h1 className="fs-2 mb-3" style={myStyle}>
         About Us
       </h1>
@@ -103,10 +89,6 @@ export default function About() {
           </div>
         </div>
       </div>
-
-      <button onClick={toggleStyle} className="btn btn-primary mt-3">
-        {btnText}
-      </button>
     </div>
   );
 }

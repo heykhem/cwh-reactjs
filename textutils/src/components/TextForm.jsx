@@ -15,9 +15,7 @@ export default function TextForm(props) {
   };
 
   const handleCopy = () => {
-    document.querySelector("#myBox").select();
     navigator.clipboard.writeText(text);
-
     props.showAlert("Copied to Clipboard", "success");
   };
 
@@ -61,12 +59,20 @@ export default function TextForm(props) {
             className={`d-flex gap-5 mt-2 mb-3 text-${props.mode === "light" ? "dark-emphasis" : "white"} fs-6`}
           >
             <p>
-              {text === ""
-                ? text.trim().split(" ").length - 1
-                : text.trim().split(" ").length}{" "}
+              {
+                text.split(" ").filter((element) => {
+                  return element.length !== 0;
+                }).length
+              }{" "}
               Words and {text.length} characters
             </p>
-            <p>{0.008 * text.split(" ").length} Minutes to Read</p>
+            <p>
+              {0.008 *
+                text.split(" ").filter((element) => {
+                  return element.length !== 0;
+                }).length}{" "}
+              Minutes to Read
+            </p>
           </div>
         </div>
 
@@ -90,6 +96,7 @@ export default function TextForm(props) {
         <button
           className="btn btn-primary flex-shrink-0"
           onClick={handleUpClick}
+          disabled={text.length === 0}
         >
           Convert to Uppercase
         </button>
@@ -97,6 +104,7 @@ export default function TextForm(props) {
         <button
           className="btn btn-primary flex-shrink-0"
           onClick={handleLoClick}
+          disabled={text.length === 0}
         >
           Convert to Lowercase
         </button>
@@ -104,6 +112,7 @@ export default function TextForm(props) {
         <button
           className="btn btn-primary flex-shrink-0"
           onClick={handleCleanText}
+          disabled={text.length === 0}
         >
           Clean Text
         </button>
@@ -111,11 +120,16 @@ export default function TextForm(props) {
         <button
           className="btn btn-primary flex-shrink-0"
           onClick={handleExtraSpaces}
+          disabled={text.length === 0}
         >
           Remove Extra Spaces
         </button>
 
-        <button className="btn btn-primary flex-shrink-0" onClick={handleCopy}>
+        <button
+          className="btn btn-primary flex-shrink-0"
+          onClick={handleCopy}
+          disabled={text.length === 0}
+        >
           Copy
         </button>
       </div>
