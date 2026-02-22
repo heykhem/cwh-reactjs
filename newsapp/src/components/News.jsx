@@ -14,7 +14,9 @@ export default class News extends Component {
   }
 
   async componentDidMount() {
-    let url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=f2d05d8265a841dc910bde9be97e206d&page=1&pageSize=${this.props.pageSize}`;
+    const { country, category = "general", pageSize } = this.props;
+
+    let url = `https://newsapi.org/v2/top-headlines?country=${country}&category=${category}&apiKey=f2d05d8265a841dc910bde9be97e206d&page=1&pageSize=${pageSize}`;
     this.setState({ loading: true });
     let data = await fetch(url);
     let parsedData = await data.json();
@@ -34,7 +36,7 @@ export default class News extends Component {
     ) {
       const nextPage = this.state.page + 1;
       this.setState({ loading: true });
-      const url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=f2d05d8265a841dc910bde9be97e206d&page=${nextPage}&pageSize=${this.props.pageSize}`;
+      const url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=f2d05d8265a841dc910bde9be97e206d&page=${nextPage}&pageSize=${this.props.pageSize}`;
       const data = await fetch(url);
 
       const parsed = await data.json();
@@ -52,7 +54,7 @@ export default class News extends Component {
 
     this.setState({ loading: true });
 
-    const url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=f2d05d8265a841dc910bde9be97e206d&page=${prevPage}`;
+    const url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=f2d05d8265a841dc910bde9be97e206d&page=${prevPage}`;
     const data = await fetch(url);
     const parsed = await data.json();
     this.setState({
@@ -67,7 +69,7 @@ export default class News extends Component {
       <div className="container mt-5 pb-3">
         <h1 className="mb-3 fs-3">NewsMonkey - Top Headlines</h1>
         {this.state.loading && <Spinner />}
-        <div className="row gap-3 mt-2">
+        <div className="row g-4 mt-2">
           {!this.state.loading &&
             this.state.articles.map((element) => {
               return (
