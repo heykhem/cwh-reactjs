@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import NewsItem from "./NewsItem";
 import Spinner from "./Spinner";
+import timeAgo from "../utils/timeAgo";
 
 export default class News extends Component {
   constructor() {
@@ -83,6 +84,9 @@ export default class News extends Component {
                         ? element.description
                         : "No description available"
                     }
+                    author={element.author ? element.author : "Unknown"}
+                    date={timeAgo(element.publishedAt)}
+                    sources={element.source.name}
                   />
                 </div>
               );

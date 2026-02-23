@@ -20,14 +20,14 @@ const router = createBrowserRouter(
         exact
         index
         element={
-          <News key="general" pageSize={5} country="us" category="general" />
+          <News key="general" pageSize={6} country="us" category="general" />
         }
       />
       <Route
         exact
         path="business"
         element={
-          <News key="business" pageSize={5} country="us" category="business" />
+          <News key="business" pageSize={6} country="us" category="business" />
         }
       />
       <Route
@@ -36,7 +36,7 @@ const router = createBrowserRouter(
         element={
           <News
             key="entertainment"
-            pageSize={5}
+            pageSize={6}
             country="us"
             category="entertainment"
           />
@@ -46,21 +46,21 @@ const router = createBrowserRouter(
         exact
         path="health"
         element={
-          <News key="health" pageSize={5} country="us" category="health" />
+          <News key="health" pageSize={6} country="us" category="health" />
         }
       />
       <Route
         exact
         path="science"
         element={
-          <News key="science" pageSize={5} country="us" category="science" />
+          <News key="science" pageSize={6} country="us" category="science" />
         }
       />
       <Route
         exact
         path="sports"
         element={
-          <News key="sports" pageSize={5} country="us" category="sports" />
+          <News key="sports" pageSize={6} country="us" category="sports" />
         }
       />
       <Route
@@ -69,7 +69,7 @@ const router = createBrowserRouter(
         element={
           <News
             key="technology"
-            pageSize={5}
+            pageSize={6}
             country="us"
             category="technology"
           />
