@@ -20,7 +20,7 @@ export default class NewsItem extends Component {
           />
 
           <span
-            class="badge text-bg-primary position-absolute rounded-sm p-2 "
+            className="badge text-bg-primary position-absolute rounded-sm p-2 "
             style={{ right: "10px", bottom: "10px" }}
           >
             {sources}

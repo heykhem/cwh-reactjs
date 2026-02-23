@@ -14,10 +14,10 @@ export default class News extends Component {
     };
   }
 
-  async componentDidMount() {
+  async updateNews() {
     const { country, category = "general", pageSize } = this.props;
 
-    let url = `https://newsapi.org/v2/top-headlines?country=${country}&category=${category}&apiKey=f2d05d8265a841dc910bde9be97e206d&page=1&pageSize=${pageSize}`;
+    let url = `https://newsapi.org/v2/top-headlines?country=${country}&category=${category}&apiKey=f2d05d8265a841dc910bde9be97e206d&page=${this.state.page}&pageSize=${pageSize}`;
     this.setState({ loading: true });
     let data = await fetch(url);
     let parsedData = await data.json();
@@ -28,41 +28,21 @@ export default class News extends Component {
     });
   }
 
-  handleNextClick = async () => {
-    if (
-      !(
-        this.state.page + 1 >
-        Math.ceil(this.state.totalResults / `${this.props.pageSize}`)
-      )
-    ) {
-      const nextPage = this.state.page + 1;
-      this.setState({ loading: true });
-      const url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=f2d05d8265a841dc910bde9be97e206d&page=${nextPage}&pageSize=${this.props.pageSize}`;
-      const data = await fetch(url);
+  async componentDidMount() {
+    this.updateNews();
+  }
 
-      const parsed = await data.json();
-      this.setState({
-        page: nextPage,
-        articles: parsed.articles,
-        loading: false,
-      });
-    }
+  handlePrevClick = () => {
+    if (this.state.page <= 1) return;
+
+    this.setState((prev) => ({ page: prev.page - 1 }), this.updateNews);
   };
 
-  handlePrevClick = async () => {
-    if (this.state.page <= 1) return;
-    const prevPage = this.state.page - 1;
+  handleNextClick = () => {
+    const totalPages = Math.ceil(this.state.totalResults / this.props.pageSize);
+    if (this.state.page + 1 >= totalPages) return;
 
-    this.setState({ loading: true });
-
-    const url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=f2d05d8265a841dc910bde9be97e206d&page=${prevPage}`;
-    const data = await fetch(url);
-    const parsed = await data.json();
-    this.setState({
-      page: prevPage,
-      articles: parsed.articles,
-      loading: false,
-    });
+    this.setState((prev) => ({ page: prev.page + 1 }), this.updateNews);
   };
 
   render() {
