@@ -1,109 +1,100 @@
-import React, { Component } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import NewsItem from "./NewsItem";
 import Spinner from "./Spinner";
 import timeAgo from "../utils/timeAgo";
+import { useState, useEffect } from "react";
 
-export default class News extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      articles: [],
-      loading: true,
-      page: 1,
-      totalResults: 0,
-    };
+function News(props) {
+  const {
+    country,
+    category = "general",
+    pageSize,
+    setProgress,
+    apiKey,
+  } = props;
 
-    document.title = "News Monkey - " + this.capitalize(this.props.category);
-  }
+  const [articles, setArticles] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
+  const [totalResults, setTotalResults] = useState(0);
 
-  capitalize = (word) => {
+  const capitalize = (word) => {
     if (!word) return "";
     return word.charAt(0).toUpperCase() + word.slice(1);
   };
 
-  async updateNews() {
-    const {
-      country,
-      category = "general",
-      pageSize,
-      setProgress,
-      apiKey,
-    } = this.props;
+  const updateNews = async () => {
     setProgress(10);
-    const url = `https://newsapi.org/v2/top-headlines?country=${country}&category=${category}&apiKey=${apiKey}&page=${this.state.page}&pageSize=${pageSize}`;
-    this.setState({ loading: true });
+    const url = `https://newsapi.org/v2/top-headlines?country=${country}&category=${category}&apiKey=${apiKey}&page=${page}&pageSize=${pageSize}`;
+    setLoading(true);
     let data = await fetch(url);
-    setProgress(30);
-
+    props.setProgress(30);
     let parsedData = await data.json();
     setProgress(70);
-
-    this.setState({
-      articles: parsedData.articles,
-      totalResults: parsedData.totalResults,
-      loading: false,
-    });
+    setArticles(parsedData.articles);
+    setTotalResults(parsedData.totalResults);
+    setLoading(false);
     setProgress(100);
-  }
-
-  async componentDidMount() {
-    this.updateNews();
-  }
-
-  fetchMoreData = async () => {
-    const { country, category = "general", pageSize, apiKey } = this.props;
-    this.setState({ page: this.state.page + 1 });
-    const url = `https://newsapi.org/v2/top-headlines?country=${country}&category=${category}&apiKey=${apiKey}&page=${this.state.page}&pageSize=${pageSize}`;
-    let data = await fetch(url);
-    let parsedData = await data.json();
-    this.setState({
-      articles: this.state.articles.concat(parsedData.articles),
-      totalResults: parsedData.totalResults,
-    });
   };
 
-  render() {
-    return (
-      <div className="container mt-5 pb-3">
-        <h1 className="mb-3 fs-3">
-          NewsMonkey - Top {this.capitalize(this.props.category)} Headlines
-        </h1>
-        {this.state.loading && <Spinner />}
-        <InfiniteScroll
-          dataLength={this.state.articles.length}
-          next={this.fetchMoreData}
-          hasMore={this.state.articles.length < this.state.totalResults}
-          loader={<Spinner />}
-        >
-          <div className="container">
-            <div className="row g-4 mt-2">
-              {this.state.articles.map((element, index) => {
-                return (
-                  <div
-                    key={`${element.source?.id || element.source?.name || "src"}-${element.publishedAt || "date"}-${index}`}
-                    className="col-md-4"
-                  >
-                    <NewsItem
-                      newsUrl={element.url}
-                      imageUrl={element.urlToImage || "/img/default.jpg"}
-                      title={element.title}
-                      description={
-                        element.description
-                          ? element.description
-                          : "No description available"
-                      }
-                      author={element.author ? element.author : "Unknown"}
-                      date={timeAgo(element.publishedAt)}
-                      sources={element.source.name}
-                    />
-                  </div>
-                );
-              })}
-            </div>
+  useEffect(() => {
+    updateNews();
+  }, []);
+
+  useEffect(() => {
+    document.title = `News Monkey - ${capitalize(category)}`;
+  }, [category]);
+
+  const fetchMoreData = async () => {
+    setPage(page + 1);
+    const url = `https://newsapi.org/v2/top-headlines?country=${country}&category=${category}&apiKey=${apiKey}&page=${page}&pageSize=${pageSize}`;
+    let data = await fetch(url);
+    let parsedData = await data.json();
+    setArticles(articles.concat(parsedData.articles));
+    setTotalResults(parsedData.totalResults);
+  };
+
+  return (
+    <div className="container mt-5 pb-3">
+      <h1 className="mb-3 fs-3">
+        NewsMonkey - Top {capitalize(category)} Headlines
+      </h1>
+      {loading && <Spinner />}
+      <InfiniteScroll
+        dataLength={articles.length}
+        next={fetchMoreData}
+        hasMore={articles.length < totalResults}
+        loader={<Spinner />}
+      >
+        <div className="container">
+          <div className="row g-4 mt-2">
+            {articles.map((element, index) => {
+              return (
+                <div
+                  key={`${element.source?.id || element.source?.name || "src"}-${element.publishedAt || "date"}-${index}`}
+                  className="col-md-4"
+                >
+                  <NewsItem
+                    newsUrl={element.url || ""}
+                    imageUrl={element.urlToImage || "/img/default.jpg"}
+                    title={element.title}
+                    description={
+                      element.description
+                        ? element.description
+                        : "No description available"
+                    }
+                    author={element.author ? element.author : "Unknown"}
+                    date={timeAgo(element.publishedAt)}
+                    sources={element.source.name}
+                  />
+                </div>
+              );
+            })}
           </div>
-        </InfiniteScroll>
-      </div>
-    );
-  }
+        </div>
+      </InfiniteScroll>
+    </div>
+  );
 }
+
+export default News;
