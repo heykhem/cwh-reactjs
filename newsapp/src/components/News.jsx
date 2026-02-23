@@ -4,15 +4,22 @@ import Spinner from "./Spinner";
 import timeAgo from "../utils/timeAgo";
 
 export default class News extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       articles: [],
       loading: false,
       page: 1,
       totalResults: 0,
     };
+
+    document.title = "News Monkey - " + this.capitalize(this.props.category);
   }
+
+  capitalize = (word) => {
+    if (!word) return "";
+    return word.charAt(0).toUpperCase() + word.slice(1);
+  };
 
   async updateNews() {
     const { country, category = "general", pageSize } = this.props;
@@ -48,7 +55,9 @@ export default class News extends Component {
   render() {
     return (
       <div className="container mt-5 pb-3">
-        <h1 className="mb-3 fs-3">NewsMonkey - Top Headlines</h1>
+        <h1 className="mb-3 fs-3">
+          NewsMonkey - Top {this.capitalize(this.props.category)} Headlines
+        </h1>
         {this.state.loading && <Spinner />}
         <div className="row g-4 mt-2">
           {!this.state.loading &&
