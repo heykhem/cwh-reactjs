@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 function Navbar() {
   return (
-    <div className=" bg-body-secondary mx-auto">
+    <div className="fixed-top bg-body-secondary mx-auto ">
       <div className="container">
         <nav className="navbar navbar-expand-lg ">
           <div className="container-fluid">

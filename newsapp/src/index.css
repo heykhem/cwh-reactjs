@@ -13,3 +13,13 @@ h6,
 .navbar-brand {
   font-family: "Merriweather", serif;
 }
+
+.mt-large {
+  margin-top: 120px !important;
+}
+
+.custom-container {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  overflow-x: hidden;
+}

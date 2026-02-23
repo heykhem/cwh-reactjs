@@ -39,6 +39,8 @@ function News(props) {
 
   useEffect(() => {
     updateNews();
+
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
@@ -46,8 +48,8 @@ function News(props) {
   }, [category]);
 
   const fetchMoreData = async () => {
+    const url = `https://newsapi.org/v2/top-headlines?country=${country}&category=${category}&apiKey=${apiKey}&page=${page + 1}&pageSize=${pageSize}`;
     setPage(page + 1);
-    const url = `https://newsapi.org/v2/top-headlines?country=${country}&category=${category}&apiKey=${apiKey}&page=${page}&pageSize=${pageSize}`;
     let data = await fetch(url);
     let parsedData = await data.json();
     setArticles(articles.concat(parsedData.articles));
@@ -55,7 +57,7 @@ function News(props) {
   };
 
   return (
-    <div className="container mt-5 pb-3">
+    <div className="container mt-large pb-3">
       <h1 className="mb-3 fs-3">
         NewsMonkey - Top {capitalize(category)} Headlines
       </h1>
@@ -66,7 +68,7 @@ function News(props) {
         hasMore={articles.length < totalResults}
         loader={<Spinner />}
       >
-        <div className="container">
+        <div className="container custom-container">
           <div className="row g-4 mt-2">
             {articles.map((element, index) => {
               return (
