@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 export class Navbar extends Component {
   render() {
@@ -7,9 +8,9 @@ export class Navbar extends Component {
         <div className="container">
           <nav className="navbar navbar-expand-lg ">
             <div className="container-fluid">
-              <a
+              <Link
                 className="navbar-brand d-flex align-items-center gap-2"
-                href="#"
+                to="/"
               >
                 <img
                   src="/img/logo.png"
@@ -17,7 +18,7 @@ export class Navbar extends Component {
                   style={{ width: "50px", objectFit: "cover" }}
                 />
                 NewsMonkey
-              </a>
+              </Link>
               <button
                 className="navbar-toggler"
                 type="button"
@@ -35,49 +36,44 @@ export class Navbar extends Component {
               >
                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                   <li className="nav-item">
-                    <a className="nav-link" aria-current="page" href="#">
+                    <Link className="nav-link" aria-current="page" to="/">
                       Home
-                    </a>
+                    </Link>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="#">
+                    <Link className="nav-link" to="about">
                       About
-                    </a>
+                    </Link>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="#">
+                    <Link className="nav-link" to="business">
                       Business
-                    </a>
+                    </Link>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="#">
+                    <Link className="nav-link" to="entertainment">
                       Entertainment
-                    </a>
+                    </Link>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="#">
-                      General
-                    </a>
-                  </li>
-                  <li className="nav-item">
-                    <a className="nav-link" href="#">
+                    <Link className="nav-link" to="health">
                       Health
-                    </a>
+                    </Link>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="#">
+                    <Link className="nav-link" to="science">
                       Science
-                    </a>
+                    </Link>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="#">
+                    <Link className="nav-link" to="sports">
                       Sports
-                    </a>
+                    </Link>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="#">
+                    <Link className="nav-link" to="technology">
                       Technology
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </div>
