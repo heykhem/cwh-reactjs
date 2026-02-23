@@ -12,6 +12,7 @@ import "./index.css";
 import App from "./App";
 import News from "./components/News";
 import NotFoundPage from "./components/NotFoundPage";
+import NewsWithContext from "./components/NewsWithContext";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -20,21 +21,31 @@ const router = createBrowserRouter(
         exact
         index
         element={
-          <News key="general" pageSize={6} country="us" category="general" />
+          <NewsWithContext
+            key="general"
+            pageSize={6}
+            country="us"
+            category="business"
+          />
         }
       />
       <Route
         exact
         path="business"
         element={
-          <News key="business" pageSize={6} country="us" category="business" />
+          <NewsWithContext
+            key="business"
+            pageSize={6}
+            country="us"
+            category="business"
+          />
         }
       />
       <Route
         exact
         path="entertainment"
         element={
-          <News
+          <NewsWithContext
             key="entertainment"
             pageSize={6}
             country="us"
@@ -46,28 +57,43 @@ const router = createBrowserRouter(
         exact
         path="health"
         element={
-          <News key="health" pageSize={6} country="us" category="health" />
+          <NewsWithContext
+            key="health"
+            pageSize={6}
+            country="us"
+            category="health"
+          />
         }
       />
       <Route
         exact
         path="science"
         element={
-          <News key="science" pageSize={6} country="us" category="science" />
+          <NewsWithContext
+            key="science"
+            pageSize={6}
+            country="us"
+            category="science"
+          />
         }
       />
       <Route
         exact
         path="sports"
         element={
-          <News key="sports" pageSize={6} country="us" category="sports" />
+          <NewsWithContext
+            key="sports"
+            pageSize={6}
+            country="us"
+            category="sports"
+          />
         }
       />
       <Route
         exact
         path="technology"
         element={
-          <News
+          <NewsWithContext
             key="technology"
             pageSize={6}
             country="us"
