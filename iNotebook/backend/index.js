@@ -4,6 +4,8 @@ const express = require("express");
 const app = express();
 const port = 3000;
 
+app.use(express.json());
+
 connectToMongo()
   .then(() => console.log("Connected to db successfully"))
   .catch((error) => console.log(error));
