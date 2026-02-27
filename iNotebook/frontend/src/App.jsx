@@ -1,7 +1,14 @@
+import { Routes, Route, Link } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import { Outlet } from "react-router-dom";
+
 function App() {
   return (
     <>
-      <h1>This is iNotebook</h1>
+      <Navbar />
+      <div className="container mt-5">
+        <Outlet />
+      </div>
     </>
   );
 }
