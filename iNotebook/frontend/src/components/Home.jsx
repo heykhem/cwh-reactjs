@@ -1,4 +1,9 @@
+import { useContext } from "react";
+import NoteContext from "../context/notes/NoteContext";
+
 function Home() {
+  const context = useContext(NoteContext);
+  const { notes, setNotes } = context;
   return (
     <div>
       <section>
@@ -43,6 +48,9 @@ function Home() {
       </section>
       <section className="my-3">
         <h1>Your Notes</h1>
+        {notes.map((note) => {
+          return note.title;
+        })}
       </section>
     </div>
   );
