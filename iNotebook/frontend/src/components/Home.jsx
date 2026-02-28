@@ -1,9 +1,6 @@
-import { useContext } from "react";
-import NoteContext from "../context/notes/NoteContext";
+import Notes from "./Notes";
 
 function Home() {
-  const context = useContext(NoteContext);
-  const { notes, setNotes } = context;
   return (
     <div>
       <section>
@@ -31,27 +28,12 @@ function Home() {
               placeholder="Password"
             />
           </div>
-          <div className="form-check">
-            <input
-              type="checkbox"
-              className="form-check-input"
-              id="exampleCheck1"
-            />
-            <label className="form-check-label" htmlFor="exampleCheck1">
-              Check me out
-            </label>
-          </div>
           <button type="submit" className="btn btn-primary">
             Submit
           </button>
         </form>
       </section>
-      <section className="my-3">
-        <h1>Your Notes</h1>
-        {notes.map((note) => {
-          return note.title;
-        })}
-      </section>
+      <Notes />
     </div>
   );
 }
