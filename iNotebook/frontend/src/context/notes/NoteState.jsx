@@ -55,9 +55,7 @@ const NoteState = (props) => {
 
   // Add a Note
   const addNote = (title, description, tags) => {
-    console.log("Note added");
     // TOD0 API CALL
-
     let note = {
       title: title,
       description: description,
@@ -67,10 +65,14 @@ const NoteState = (props) => {
   };
 
   // Delete a Note
-  const deleteNote = () => {};
+  const deleteNote = (noteId) => {
+    // TOD0 API CALL
+    const newNotes = notes.filter((note) => note._id !== noteId);
+    setNotes(newNotes);
+  };
 
   // Edit a Note
-  const editNote = () => {};
+  const editNote = (id, title, description, tags) => {};
 
   return (
     <NoteContext.Provider value={{ notes, addNote, deleteNote, editNote }}>

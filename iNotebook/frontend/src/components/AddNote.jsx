@@ -46,7 +46,7 @@ function AddNote() {
           />
         </div>
         <button type="submit" className="btn btn-primary" onClick={handleClick}>
-          Add
+          Add Note
         </button>
       </form>
     </section>
