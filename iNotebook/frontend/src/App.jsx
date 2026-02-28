@@ -8,7 +8,7 @@ function App() {
     <>
       <NoteState>
         <Navbar />
-        <div className="container mt-5">
+        <div className="container mt-3">
           <Outlet />
         </div>
       </NoteState>
