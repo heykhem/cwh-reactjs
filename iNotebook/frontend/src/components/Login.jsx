@@ -47,9 +47,6 @@ function Login() {
           value={credentails.email}
           onChange={onChange}
         />
-        <div id="emailHelp" className="form-text">
-          We'll never share your email with anyone else.
-        </div>
       </div>
       <div className="mb-3">
         <label htmlFor="password" className="form-label">
@@ -63,18 +60,6 @@ function Login() {
           value={credentails.password}
           onChange={onChange}
         />
-      </div>
-      <div className="mb-3 form-check text-muted">
-        <input
-          type="checkbox"
-          className="form-check-input"
-          id="terms"
-          name="terms"
-          required
-        />
-        <label className="form-check-label" htmlFor="terms">
-          Agree to Terms and Conditions *
-        </label>
       </div>
       <button type="submit" className="btn btn-primary">
         Submit
