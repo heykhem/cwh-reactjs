@@ -33,7 +33,7 @@ router.post(
   ],
   async (req, res) => {
     try {
-      const { title, description, tags } = req.body;
+      const { title, description, tag } = req.body;
 
       //if there are errors, return Bad request and the errors
       const errors = validationResult(req);
@@ -44,7 +44,7 @@ router.post(
       const note = await new Notes({
         title,
         description,
-        tags,
+        tag,
         user: req.user.id,
       });
       const savedNote = await note.save();
@@ -58,14 +58,14 @@ router.post(
 
 // ROUTE 3: update an existing note: PUT "api/auth/updatenote".login required
 router.put("/updatenote/:id", fetchUser, async (req, res) => {
-  const { title, description, tags } = req.body;
+  const { title, description, tag } = req.body;
 
   try {
     // create a newNote object
     const newNote = {};
     if (title) newNote.title = title;
     if (description) newNote.description = description;
-    if (tags) newNote.tags = tags;
+    if (tag) newNote.tag = tag;
 
     // find the note to be updated and update it
     let note = await Notes.findById(req.params.id);
