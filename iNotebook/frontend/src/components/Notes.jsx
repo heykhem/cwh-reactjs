@@ -8,6 +8,7 @@ function Notes() {
   const context = useContext(NoteContext);
   const { notes, editNote, getNotes } = context;
   const ref = useRef(null);
+  const refClose = useRef(null);
   const [note, setNote] = useState({
     id: "",
     etitle: "",
@@ -22,8 +23,8 @@ function Notes() {
 
   const updateNote = async (currentNote) => {
     ref.current.click();
-    console.log(currentNote);
     setNote({
+      id: currentNote._id,
       etitle: currentNote.title,
       edescription: currentNote.description,
       etag: currentNote.tag,
@@ -36,7 +37,8 @@ function Notes() {
 
   const handleClick = async (e) => {
     e.preventDefault();
-    console.log("Updating note:", note);
+    editNote(note.id, note.etitle, note.edescription, note.etag);
+    refClose.current.click();
   };
 
   return (
@@ -118,6 +120,7 @@ function Notes() {
                 type="button"
                 className="btn btn-secondary"
                 data-bs-dismiss="modal"
+                ref={refClose}
               >
                 Close
               </button>

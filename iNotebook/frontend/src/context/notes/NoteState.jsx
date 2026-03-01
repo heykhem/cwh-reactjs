@@ -71,7 +71,7 @@ const NoteState = (props) => {
   };
 
   // Add a Note
-  const addNote = async (title, description, tags) => {
+  const addNote = async (title, description, tag) => {
     // API Call
     const url = `${host}/api/notes/addnote`;
     const response = await fetch(url, {
@@ -81,7 +81,7 @@ const NoteState = (props) => {
         "auth-token":
           "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjlhMTIyMmVhMGY3YTY4YjFhNzU4ZWE0In0sImlhdCI6MTc3MjE3Nzc1M30.HSf8wGDy5f262Q-kdcoyYeF3n_2Fzv4QBRqncZEO5rI",
       },
-      body: JSON.stringify({ title, description, tags }),
+      body: JSON.stringify({ title, description, tag }),
     });
     const json = await response.json();
     console.log(json);
@@ -89,7 +89,7 @@ const NoteState = (props) => {
     let note = {
       title: title,
       description: description,
-      tags: tags,
+      tag: tag,
     };
     setNotes(notes.concat(note));
   };
@@ -114,31 +114,25 @@ const NoteState = (props) => {
   };
 
   // Edit a Note
-  const editNote = async (id, title, description, tags) => {
+  const editNote = async (id, title, description, tag) => {
     // API Call
     const url = `${host}/api/notes/updatenote/${id}`;
     const response = await fetch(url, {
-      method: "POST",
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
         "auth-token":
           "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjlhMTIyMmVhMGY3YTY4YjFhNzU4ZWE0In0sImlhdCI6MTc3MjE3Nzc1M30.HSf8wGDy5f262Q-kdcoyYeF3n_2Fzv4QBRqncZEO5rI",
       },
+      body: JSON.stringify({ title, description, tag }),
     });
-    const json = response.json();
+
+    const json = await response.json();
     console.log(json);
 
-    for (let index = 0; index < notes.length; index++) {
-      let element = notes[index];
-      if (element._id === id) {
-        let newNote = {
-          title: title,
-          description: description,
-          tags: tags,
-        };
-        setNotes(notes.concat(newNote));
-      }
-    }
+    setNotes((prev) =>
+      prev.map((n) => (n._id === id ? { ...n, title, description, tag } : n)),
+    );
   };
 
   return (
