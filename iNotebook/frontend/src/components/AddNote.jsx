@@ -13,7 +13,11 @@ function AddNote() {
 
   const handleClick = (e) => {
     e.preventDefault();
-    addNote(note.title, note.description, note.tag);
+    addNote(
+      note.title,
+      note.description,
+      note.tag === "" ? "general" : note.tag,
+    );
     setNote({ title: "", description: "", tag: "" });
   };
 
@@ -28,10 +32,10 @@ function AddNote() {
             className="form-control mt-2"
             id="title"
             aria-describedby="title"
-            placeholder="Enter Title"
             name="title"
             autoComplete="off"
             onChange={onChange}
+            value={note.title}
           />
         </div>
         <div className="form-group mt-3">
@@ -40,27 +44,28 @@ function AddNote() {
             type="text"
             className="form-control mt-2"
             id="description"
-            placeholder="Password"
             name="description"
             autoComplete="off"
             onChange={onChange}
+            value={note.description}
           />
         </div>
         <div className="form-group mt-3">
-          <label htmlFor="tags">Tags</label>
+          <label htmlFor="tag">Tag</label>
           <input
             type="text"
             className="form-control mt-2"
-            id="tags"
-            placeholder="Tags"
-            name="tags"
+            id="tag"
+            name="tag"
             autoComplete="off"
             onChange={onChange}
+            value={note.tag}
           />
         </div>
         <button
           type="submit"
           className="btn btn-primary mt-3"
+          disabled={note.title.length < 5 || note.description.length < 5}
           onClick={handleClick}
         >
           Add Note

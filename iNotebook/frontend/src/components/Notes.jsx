@@ -37,7 +37,12 @@ function Notes() {
 
   const handleClick = async (e) => {
     e.preventDefault();
-    editNote(note.id, note.etitle, note.edescription, note.etag);
+    editNote(
+      note.id,
+      note.etitle,
+      note.edescription,
+      note.etag === "" ? "general" : note.etag,
+    );
     refClose.current.click();
   };
 
@@ -86,6 +91,8 @@ function Notes() {
                   autoComplete="off"
                   onChange={onChange}
                   value={note.etitle}
+                  minLength={5}
+                  required
                 />
               </div>
               <div className="form-group mt-3">
@@ -94,11 +101,12 @@ function Notes() {
                   type="text"
                   className="form-control mt-2"
                   id="edescription"
-                  placeholder="Password"
                   name="edescription"
                   autoComplete="off"
                   onChange={onChange}
                   value={note.edescription}
+                  minLength={5}
+                  required
                 />
               </div>
               <div className="form-group mt-3">
@@ -125,9 +133,12 @@ function Notes() {
                 Close
               </button>
               <button
-                type="button"
+                type="submit"
                 className="btn btn-primary"
                 onClick={handleClick}
+                disabled={
+                  note.etitle.length < 5 || note.edescription.length < 5
+                }
               >
                 Update Changes
               </button>
@@ -139,6 +150,9 @@ function Notes() {
       <section className="my-3">
         <h1>Your Notes</h1>
         <div className="row">
+          <div className="container text-muted">
+            {notes.length === 0 && "No note to display"}
+          </div>
           {notes.map((note) => (
             <NoteItem key={note._id} updateNote={updateNote} note={note} />
           ))}

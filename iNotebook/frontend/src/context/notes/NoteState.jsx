@@ -83,8 +83,8 @@ const NoteState = (props) => {
       },
       body: JSON.stringify({ title, description, tag }),
     });
+    //eslint-disable-next-line
     const json = await response.json();
-    console.log(json);
 
     let note = {
       title: title,
@@ -106,8 +106,8 @@ const NoteState = (props) => {
           "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjlhMTIyMmVhMGY3YTY4YjFhNzU4ZWE0In0sImlhdCI6MTc3MjE3Nzc1M30.HSf8wGDy5f262Q-kdcoyYeF3n_2Fzv4QBRqncZEO5rI",
       },
     });
+    //eslint-disable-next-line
     const json = await response.json();
-    console.log(json);
 
     const newNotes = notes.filter((note) => note._id !== noteId);
     setNotes(newNotes);
@@ -127,8 +127,8 @@ const NoteState = (props) => {
       body: JSON.stringify({ title, description, tag }),
     });
 
+    //eslint-disable-next-line
     const json = await response.json();
-    console.log(json);
 
     setNotes((prev) =>
       prev.map((n) => (n._id === id ? { ...n, title, description, tag } : n)),
