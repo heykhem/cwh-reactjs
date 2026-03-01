@@ -1,8 +1,8 @@
-import { Routes, Route, Link } from "react-router-dom";
-import Navbar from "./components/Navbar";
 import { Outlet } from "react-router-dom";
-import NoteState from "./context/notes/NoteState.jsx";
+
+import Navbar from "./components/Navbar";
 import Alert from "./components/Alert.jsx";
+import NoteState from "./context/notes/NoteState.jsx";
 
 function App() {
   return (

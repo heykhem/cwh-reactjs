@@ -23,7 +23,7 @@ function AddNote() {
 
   return (
     <section>
-      <h1>Add a note</h1>
+      <h1 className="fs-2">Add a note</h1>
       <form>
         <div className="form-group">
           <label htmlFor="title">Title</label>

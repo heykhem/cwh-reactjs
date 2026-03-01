@@ -57,10 +57,10 @@ function Notes() {
         data-bs-target="#exampleModal"
         ref={ref}
       >
-        Launch demo modal
+        Edit
       </button>
 
-      {/* MODAL */}
+      {/* EDIT MODAL */}
       <div
         className="modal fade"
         id="exampleModal"
@@ -148,7 +148,7 @@ function Notes() {
       </div>
 
       <section className="my-3">
-        <h1>Your Notes</h1>
+        <h1 className="fs-2">Your Notes</h1>
         <div className="row">
           <div className="container text-muted">
             {notes.length === 0 && "No note to display"}
