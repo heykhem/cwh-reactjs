@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 
 function Signup() {
+  const { showAlert } = useOutletContext();
   const navigate = useNavigate();
   const [credentails, setCredentails] = useState({
     name: "",
@@ -33,87 +34,90 @@ function Signup() {
         // redirect
         localStorage.setItem("token", json.authToken);
         navigate("/");
+        showAlert(": Account Created Successfully", "success");
       } else {
-        alert("Invalid credentials");
+        showAlert(": Invalid Credentials", "danger");
       }
-    } else console.log("Both are not same");
+    } else showAlert(": Password and Confirm password must be same", "danger");
   };
 
   const onChange = (e) => {
     setCredentails({ ...credentails, [e.target.name]: e.target.value });
   };
   return (
-    <form onSubmit={handleSumbit}>
-      <div className="mb-3">
-        <label htmlFor="name" className="form-label">
-          Full Name
-        </label>
-        <input
-          type="text"
-          className="form-control"
-          id="name"
-          aria-describedby="name"
-          name="name"
-          onChange={onChange}
-        />
-      </div>
-      <div className="mb-3">
-        <label htmlFor="email" className="form-label">
-          Email Address
-        </label>
-        <input
-          type="email"
-          className="form-control"
-          id="email"
-          aria-describedby="emailHelp"
-          name="email"
-          onChange={onChange}
-        />
-      </div>
-      <div className="mb-3">
-        <label htmlFor="password" className="form-label">
-          Password
-        </label>
-        <input
-          type="password"
-          className="form-control"
-          id="password"
-          name="password"
-          onChange={onChange}
-          minLength={5}
-          required
-        />
-      </div>
-      <div className="mb-3">
-        <label htmlFor="cpassword" className="form-label">
-          Confirm Password
-        </label>
-        <input
-          type="password"
-          className="form-control"
-          id="cpassword"
-          name="cpassword"
-          onChange={onChange}
-          minLength={5}
-          required
-        />
-      </div>
-      <div className="mb-3 form-check text-muted">
-        <input
-          type="checkbox"
-          className="form-check-input"
-          id="terms"
-          name="terms"
-          required
-        />
-        <label className="form-check-label" htmlFor="terms">
-          Agree to Terms and Conditions *
-        </label>
-      </div>
-      <button type="submit" className="btn btn-primary">
-        Submit
-      </button>
-    </form>
+    <div className="container">
+      <form onSubmit={handleSumbit}>
+        <div className="mb-3">
+          <label htmlFor="name" className="form-label">
+            Full Name
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="name"
+            aria-describedby="name"
+            name="name"
+            onChange={onChange}
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="email" className="form-label">
+            Email Address
+          </label>
+          <input
+            type="email"
+            className="form-control"
+            id="email"
+            aria-describedby="emailHelp"
+            name="email"
+            onChange={onChange}
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="password" className="form-label">
+            Password
+          </label>
+          <input
+            type="password"
+            className="form-control"
+            id="password"
+            name="password"
+            onChange={onChange}
+            minLength={5}
+            required
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="cpassword" className="form-label">
+            Confirm Password
+          </label>
+          <input
+            type="password"
+            className="form-control"
+            id="cpassword"
+            name="cpassword"
+            onChange={onChange}
+            minLength={5}
+            required
+          />
+        </div>
+        <div className="mb-3 form-check text-muted">
+          <input
+            type="checkbox"
+            className="form-check-input"
+            id="terms"
+            name="terms"
+            required
+          />
+          <label className="form-check-label" htmlFor="terms">
+            Agree to Terms and Conditions *
+          </label>
+        </div>
+        <button type="submit" className="btn btn-primary">
+          Submit
+        </button>
+      </form>
+    </div>
   );
 }
 

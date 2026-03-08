@@ -4,7 +4,7 @@ import NoteContext from "../context/notes/NoteContext";
 import NoteItem from "./NoteItem";
 import AddNote from "./AddNote";
 
-function Notes() {
+function Notes({ showAlert }) {
   const context = useContext(NoteContext);
   const { notes, editNote, getNotes } = context;
   const ref = useRef(null);
@@ -37,13 +37,14 @@ function Notes() {
 
   const handleClick = async (e) => {
     e.preventDefault();
-    editNote(
+    await editNote(
       note.id,
       note.etitle,
       note.edescription,
       note.etag === "" ? "general" : note.etag,
     );
     refClose.current.click();
+    showAlert(": Updated Successfully", "success");
   };
 
   return (

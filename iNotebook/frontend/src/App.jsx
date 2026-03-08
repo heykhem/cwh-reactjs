@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Outlet } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
@@ -5,13 +6,22 @@ import Alert from "./components/Alert.jsx";
 import NoteState from "./context/notes/NoteState.jsx";
 
 function App() {
+  const [alert, setAlert] = useState(null);
+
+  const showAlert = (message, type) => {
+    setAlert({ msg: message, type: type });
+    setTimeout(() => {
+      setAlert(null);
+    }, 2200);
+  };
+
   return (
     <>
-      <NoteState>
+      <NoteState showAlert={showAlert}>
         <Navbar />
-        <Alert message={"note added"} />
+        <Alert alert={alert} />
         <div className="container mt-3">
-          <Outlet />
+          <Outlet context={{ alert, showAlert }} />
         </div>
       </NoteState>
     </>

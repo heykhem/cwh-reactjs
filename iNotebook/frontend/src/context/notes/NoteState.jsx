@@ -1,7 +1,10 @@
 import { useState } from "react";
+
 import NoteContext from "./NoteContext";
 
 const NoteState = (props) => {
+  const { showAlert } = props;
+
   const host = "http://localhost:5000";
   const notesInitial = [
     {
@@ -92,6 +95,7 @@ const NoteState = (props) => {
       tag: tag,
     };
     setNotes(notes.concat(note));
+    showAlert(": Note Added Successfully", "success");
   };
 
   // Delete a Note
@@ -111,6 +115,7 @@ const NoteState = (props) => {
 
     const newNotes = notes.filter((note) => note._id !== noteId);
     setNotes(newNotes);
+    showAlert(": Note Deleted Successfully", "success");
   };
 
   // Edit a Note
