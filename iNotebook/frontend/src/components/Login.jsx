@@ -37,6 +37,7 @@ function Login() {
   };
   return (
     <div className="container">
+      <h2 className="mt-5 mb-3">Login to continue to iNotebook</h2>
       <form onSubmit={handleSumbit}>
         <div className="mb-3">
           <label htmlFor="email" className="form-label">

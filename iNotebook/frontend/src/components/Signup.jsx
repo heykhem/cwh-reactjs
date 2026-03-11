@@ -46,6 +46,7 @@ function Signup() {
   };
   return (
     <div className="container">
+      <h2 className="mt-5 mb-3">Create an account to use iNotebook</h2>
       <form onSubmit={handleSumbit}>
         <div className="mb-3">
           <label htmlFor="name" className="form-label">

@@ -1,7 +1,13 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 function Navbar() {
   let location = useLocation();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
+  };
 
   return (
     <div className="bg-light">
@@ -47,12 +53,28 @@ function Navbar() {
                 </li>
               </ul>
               <div className="d-flex gap-2">
-                <Link to="/login" className="btn btn-primary" role="button">
-                  Login
-                </Link>
-                <Link to="/signup" className="btn btn-primary" role="button">
-                  SignUP
-                </Link>
+                {!localStorage.getItem("token") ? (
+                  <>
+                    <Link to="/login" className="btn btn-primary" role="button">
+                      Login
+                    </Link>
+                    <Link
+                      to="/signup"
+                      className="btn btn-primary"
+                      role="button"
+                    >
+                      SignUp
+                    </Link>
+                  </>
+                ) : (
+                  <button
+                    className="btn btn-primary"
+                    role="button"
+                    onClick={handleLogout}
+                  >
+                    Logout
+                  </button>
+                )}
               </div>
             </div>
           </div>

@@ -6,56 +6,9 @@ const NoteState = (props) => {
   const { showAlert } = props;
 
   const host = "http://localhost:5000";
-  const notesInitial = [
-    {
-      _id: "69a2c7dc5a3a486b7479a5cc",
-      user: "69a1222ea0f7a68b1a758ea4",
-      title: "Anthropic is good",
-      description: "claude code is good",
-      tag: "general",
-      date: "2026-02-28T10:47:56.684Z",
-      __v: 0,
-    },
-    {
-      _id: "69a2c8055a3a486b7479a5ce",
-      user: "69a1222ea0f7a68b1a758ea4",
-      title: "Google is king for search",
-      description: "google is goood",
-      tag: "general",
-      date: "2026-02-28T10:48:37.258Z",
-      __v: 0,
-    },
-    {
-      _id: "69a2c8055a3a486b7479a5cz",
-      user: "69a1222ea0f7a68b1a758ea4",
-      title: "Google is king for search",
-      description: "google is goood",
-      tag: "general",
-      date: "2026-02-28T10:48:37.258Z",
-      __v: 0,
-    },
-    {
-      _id: "69a2c8055a3a489b7479a5ce",
-      user: "69a1222ea0f7a68b1a758ea4",
-      title: "Google is king for search",
-      description: "google is goood",
-      tag: "general",
-      date: "2026-02-28T10:48:37.258Z",
-      __v: 0,
-    },
-    {
-      _id: "69a2c8056a3a486b7479a5ce",
-      user: "69a1222ea0f7a68b1a758ea4",
-      title: "Google is king for search",
-      description: "google is goood",
-      tag: "general",
-      date: "2026-02-28T10:48:37.258Z",
-      __v: 0,
-    },
-  ];
 
   // eslint-ignore-next-line
-  const [notes, setNotes] = useState(notesInitial);
+  const [notes, setNotes] = useState([]);
 
   // Get all Notes
   const getNotes = async () => {
@@ -65,12 +18,15 @@ const NoteState = (props) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjlhMTIyMmVhMGY3YTY4YjFhNzU4ZWE0In0sImlhdCI6MTc3MjE3Nzc1M30.HSf8wGDy5f262Q-kdcoyYeF3n_2Fzv4QBRqncZEO5rI",
+        "auth-token": localStorage.getItem("token"),
       },
     });
-    const json = await response.json();
-    setNotes(json);
+    const data = await response.json();
+    if (Array.isArray(data)) {
+      setNotes(data);
+    } else {
+      setNotes([]);
+    }
   };
 
   // Add a Note
@@ -81,8 +37,7 @@ const NoteState = (props) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjlhMTIyMmVhMGY3YTY4YjFhNzU4ZWE0In0sImlhdCI6MTc3MjE3Nzc1M30.HSf8wGDy5f262Q-kdcoyYeF3n_2Fzv4QBRqncZEO5rI",
+        "auth-token": localStorage.getItem("token"),
       },
       body: JSON.stringify({ title, description, tag }),
     });
@@ -106,8 +61,7 @@ const NoteState = (props) => {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        "auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjlhMTIyMmVhMGY3YTY4YjFhNzU4ZWE0In0sImlhdCI6MTc3MjE3Nzc1M30.HSf8wGDy5f262Q-kdcoyYeF3n_2Fzv4QBRqncZEO5rI",
+        "auth-token": localStorage.getItem("token"),
       },
     });
     //eslint-disable-next-line
@@ -126,8 +80,7 @@ const NoteState = (props) => {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        "auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjlhMTIyMmVhMGY3YTY4YjFhNzU4ZWE0In0sImlhdCI6MTc3MjE3Nzc1M30.HSf8wGDy5f262Q-kdcoyYeF3n_2Fzv4QBRqncZEO5rI",
+        "auth-token": localStorage.getItem("token"),
       },
       body: JSON.stringify({ title, description, tag }),
     });
