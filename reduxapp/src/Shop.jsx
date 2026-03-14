@@ -1,10 +1,10 @@
 function Shop() {
   return (
     <div>
-      <h1>Deposite/Withdraw Money</h1>
-      <button className="btn btn-primary mr-2">-</button>
+      <h1>Deposit/Withdraw Money</h1>
+      <button className="btn btn-primary me-2">-</button>
       Update Balance
-      <button className="btn btn-primary ml-2">+</button>
+      <button className="btn btn-primary ms-2">+</button>
     </div>
   );
 }
