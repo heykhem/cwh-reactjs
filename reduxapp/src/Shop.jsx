@@ -1,12 +1,10 @@
-import React from "react";
-
 function Shop() {
   return (
     <div>
-      <h1>Buy Adidas Shoes 50 RS</h1>
-      <button className="btn btn-primary">-</button>
-      Add to cart
-      <button className="btn btn-primary">+</button>
+      <h1>Deposite/Withdraw Money</h1>
+      <button className="btn btn-primary mr-2">-</button>
+      Update Balance
+      <button className="btn btn-primary ml-2">+</button>
     </div>
   );
 }
